@@ -6,7 +6,7 @@
 
 # Name of this version of winetricks (YYYYMMDD) and in the case of main branch (-HHMM)
 # (This doesn't change often, use the sha256sum of the file when reporting problems)
-WINETRICKS_VERSION=20260426-1641
+WINETRICKS_VERSION=20260426-1700
 
 # This is a UTF-8 file
 # You should see an o with two dots over it here [ö]
@@ -5543,9 +5543,9 @@ helper_winvistasp1()
     filename=$1
 
     # Available at the Microsoft Catalog
-    w_download_to winvistasp1 https://catalog.s.download.windowsupdate.com/msdownload/update/software/svpk/2008/04/windows6.0-kb936330-x86_b8a3fa8f819269e37d8acde799e7a9aea3dd4529.exe F2C460675E4A64665A685968A1E8123CE5CCE4F1A419D13F9A819554305731EE windows6.0-kb936330-x86.exe
+    w_download_to winvistasp1 https://catalog.s.download.windowsupdate.com/msdownload/update/software/svpk/2008/04/windows6.0-kb936330-x86_b8a3fa8f819269e37d8acde799e7a9aea3dd4529.exe f2c460675e4a64665a685968a1e8123ce5cce4f1a419d13f9a819554305731ee windows6.0-kb936330-x86.exe
 
-    w_try_cabextract -d "${W_TMP}" -L -F "${filename}" "${W_CACHE}"/win7sp1/windows6.1-KB976932-X86.exe
+    w_try_cabextract -d "${W_TMP}" -L -F "${filename}" "${W_CACHE}"/winvistasp1/windows6.0-kb936330-x86.exe
 }
 
 # Filelist at ./misc/filelists/win7sp1_x64.txt
@@ -5554,9 +5554,9 @@ helper_winvistasp1_x64()
     filename=$1
 
     # Available at the Microsoft Catalog
-    w_download_to winvistasp1 https://catalog.s.download.windowsupdate.com/msdownload/update/software/svpk/2008/04/windows6.0-kb936330-x64_12eed6cf0a842ce2a609c622b843afc289a8f4b9.exe 4C441093F023E4A7D1C5DF32734916A5BB430CCC141D489BE15865DBBB921763 windows6.0-kb936330-x64.exe
+    w_download_to winvistasp1 https://catalog.s.download.windowsupdate.com/msdownload/update/software/svpk/2008/04/windows6.0-kb936330-x64_12eed6cf0a842ce2a609c622b843afc289a8f4b9.exe 4c441093f023e4a7d1c5df32734916a5bb430ccc141d489be15865dbbb921763 windows6.0-kb936330-x64.exe
 
-    w_try_cabextract -d "${W_TMP}" -L -F "${filename}" "${W_CACHE}"/win7sp1/windows6.1-KB976932-X64.exe
+    w_try_cabextract -d "${W_TMP}" -L -F "${filename}" "${W_CACHE}"/winvistasp1/windows6.0-kb936330-x64.exe
 }
 
 # Filelist at ./misc/filelists/win7sp1.txt
