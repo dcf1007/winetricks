@@ -4,7 +4,7 @@
 # SC2031: WINE was modified in a subshell. That change might be lost
 # This has to be right after the shebang, see: https://github.com/koalaman/shellcheck/issues/779
 
-# Name of this version of winetricks (YYYYMMDD)
+# Name of this version of winetricks (YYYYMMDD) and in the case of main branch (-HHMM)
 # (This doesn't change often, use the sha256sum of the file when reporting problems)
 WINETRICKS_VERSION=20260426-1641
 
