@@ -6,7 +6,7 @@
 
 # Name of this version of winetricks (YYYYMMDD) and in the case of main branch (-HHMM)
 # (This doesn't change often, use the sha256sum of the file when reporting problems)
-WINETRICKS_VERSION=20260426-2120
+WINETRICKS_VERSION=20260427-0225
 
 # This is a UTF-8 file
 # You should see an o with two dots over it here [ö]
@@ -795,7 +795,15 @@ w_try_msexpand()
 
     if test -f "${W_WINDIR_UNIX}/system32/expand.exe"; then
         w_try_mkdir "$3"
-        w_try "${WINE}" "${W_WINDIR_UNIX}/system32/expand.exe" "-F:$1" "$(w_pathconv -w "$2")" "$(w_pathconv -w "$3")"
+        # Trick to avoid globbing when the file parameter contains an asterisk (e.g. -F:*)
+        w_try rm -rf "${W_TMP}/empty"
+        w_try_mkdir "${W_TMP}/empty"
+    
+        (
+            cd "${W_TMP}/empty" || w_die "bug: could not cd to ${W_TMP}/empty"
+    
+            w_try "${WINE}" "${W_WINDIR_UNIX}/system32/expand.exe" "-F:$1" "$(w_pathconv -w "$2")" "$(w_pathconv -w "$3")"
+        )
     else
         w_die "Cannot find expand.exe. You must install Microsoft Delta Decompression Engine (msdelta) and try again"
     fi
