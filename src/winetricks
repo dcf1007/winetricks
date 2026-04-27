@@ -11497,7 +11497,8 @@ load_msdelta_vista()
         w_try_cp_dll "${W_TMP}/amd64_microsoft-windows-basic-misc-tools_31bf3856ad364e35_6.0.6001.18000_none_737b52f477c900ad/expand.exe" "${W_SYSTEM64_DLLS}/expand.exe"
     fi
 
-    w_override_dlls native,builtin cabinet msdelta mspatcha dpx expand.exe
+    w_override_dlls native expand.exe
+    w_override_app_dlls expand.exe native cabinet msdelta mspatcha dpx
 }
 
 w_metadata msdelta_w7 dlls \
@@ -11551,8 +11552,9 @@ load_msdelta_w7()
         w_try_cp_dll "${W_TMP}/windows6.1-kb5010451-x64/amd64_microsoft-windows-servicingstack_31bf3856ad364e35_6.1.7601.25850_none_67df6b56f72c0fa9/mspatcha.dll" "${W_SYSTEM64_DLLS}/mspatcha.dll"
         w_try_cp_dll "${W_TMP}/windows6.1-kb5010451-x64/amd64_microsoft-windows-servicingstack_31bf3856ad364e35_6.1.7601.25850_none_67df6b56f72c0fa9/msdelta.dll" "${W_SYSTEM64_DLLS}/msdelta.dll"
     fi
-
-    w_override_dlls native,builtin cabinet msdelta mspatcha dpx expand.exe
+    
+    w_override_dlls native expand.exe
+    w_override_app_dlls expand.exe native cabinet msdelta mspatcha dpx
 }
 
 #----------------------------------------------------------------
