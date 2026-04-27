@@ -6,7 +6,7 @@
 
 # Name of this version of winetricks (YYYYMMDD) and in the case of main branch (-HHMM)
 # (This doesn't change often, use the sha256sum of the file when reporting problems)
-WINETRICKS_VERSION=20260427-0225
+WINETRICKS_VERSION=20260427-1050
 
 # This is a UTF-8 file
 # You should see an o with two dots over it here [ö]
@@ -11465,6 +11465,9 @@ w_metadata msdelta_vista dlls \
 
 load_msdelta_vista()
 {
+    helper_winvistasp1 x86_microsoft-windows-cabinet_31bf3856ad364e35_6.0.6001.18000_none_373f511ce1ebb446/cabinet.dll
+    w_try_cp_dll "${W_TMP}/x86_microsoft-windows-cabinet_31bf3856ad364e35_6.0.6001.18000_none_373f511ce1ebb446/cabinet.dll" "${W_SYSTEM32_DLLS}/cabinet.dll"
+    
     helper_winvistasp1 x86_microsoft-windows-deltacompressionengine_31bf3856ad364e35_6.0.6001.18000_none_402c681885bf19c2/msdelta.dll
     w_try_cp_dll "${W_TMP}/x86_microsoft-windows-deltacompressionengine_31bf3856ad364e35_6.0.6001.18000_none_402c681885bf19c2/msdelta.dll" "${W_SYSTEM32_DLLS}/msdelta.dll"
 
@@ -11478,6 +11481,9 @@ load_msdelta_vista()
     w_try_cp_dll "${W_TMP}/x86_microsoft-windows-basic-misc-tools_31bf3856ad364e35_6.0.6001.18000_none_175cb770bf6b8f77/expand.exe" "${W_SYSTEM32_DLLS}/expand.exe"
 
     if [ "${W_ARCH}" = "win64" ]; then
+        helper_winvistasp1_x64 amd64_microsoft-windows-cabinet_31bf3856ad364e35_6.0.6001.18000_none_935deca09a49257c/cabinet.dll
+        w_try_cp_dll "${W_TMP}/amd64_microsoft-windows-cabinet_31bf3856ad364e35_6.0.6001.18000_none_935deca09a49257c/cabinet.dll" "${W_SYSTEM64_DLLS}/cabinet.dll"
+        
         helper_winvistasp1_x64 amd64_microsoft-windows-deltacompressionengine_31bf3856ad364e35_6.0.6001.18000_none_9c4b039c3e1c8af8/msdelta.dll
         w_try_cp_dll "${W_TMP}/amd64_microsoft-windows-deltacompressionengine_31bf3856ad364e35_6.0.6001.18000_none_9c4b039c3e1c8af8/msdelta.dll" "${W_SYSTEM64_DLLS}/msdelta.dll"
         
@@ -11491,7 +11497,7 @@ load_msdelta_vista()
         w_try_cp_dll "${W_TMP}/amd64_microsoft-windows-basic-misc-tools_31bf3856ad364e35_6.0.6001.18000_none_737b52f477c900ad/expand.exe" "${W_SYSTEM64_DLLS}/expand.exe"
     fi
 
-    w_override_dlls native,builtin msdelta mspatcha dpx expand.exe
+    w_override_dlls native,builtin cabinet msdelta mspatcha dpx expand.exe
 }
 
 w_metadata msdelta_w7 dlls \
@@ -11508,6 +11514,9 @@ load_msdelta_w7()
 {
     w_call msdelta_vista
     
+    helper_win7sp1 x86_microsoft-windows-cabinet_31bf3856ad364e35_6.1.7601.17514_none_3946bb08402dcd51/cabinet.dll
+    w_try_cp_dll "${W_TMP}/x86_microsoft-windows-cabinet_31bf3856ad364e35_6.1.7601.17514_none_3946bb08402dcd51/cabinet.dll" "${W_SYSTEM32_DLLS}/cabinet.dll"
+
     w_download https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2022/01/windows6.1-kb5009621-x86_2a693df44701335dd856670d1dc44d241addbf0a.msu 2d772d0b8e278abdf084a344f0ac58631770abe4ec5e43e8b8d1e1405337e3aa windows6.1-kb5009621-x86.msu
     w_try_msexpand 'windows6.1-kb5009621-x86.cab' "${W_CACHE}/${W_PACKAGE}/windows6.1-kb5009621-x86.msu" "${W_TMP}"
     w_try_mkdir "${W_TMP}/windows6.1-kb5009621-x86"
@@ -11524,6 +11533,10 @@ load_msdelta_w7()
 
     if [ "${W_ARCH}" = "win64" ]; then
         # Also install the 64-bit version
+        
+        helper_win7sp1_x64 amd64_microsoft-windows-cabinet_31bf3856ad364e35_6.1.7601.17514_none_9565568bf88b3e87/cabinet.dll
+        w_try_cp_dll "${W_TMP}/amd64_microsoft-windows-cabinet_31bf3856ad364e35_6.1.7601.17514_none_9565568bf88b3e87/cabinet.dll" "${W_SYSTEM64_DLLS}/cabinet.dll"
+    
         w_download https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2022/01/windows6.1-kb5009621-x64_4f45ea40980c099d3280ef1f4306215c601cd0fc.msu cd0767a3a4a301e555b81398c597c30025ea6473570eda69387a62f27acc668e windows6.1-kb5009621-x64.msu
         w_try_msexpand 'windows6.1-kb5009621-x64.cab' "${W_CACHE}/${W_PACKAGE}/windows6.1-kb5009621-x64.msu" "${W_TMP}"
         w_try_mkdir "${W_TMP}/windows6.1-kb5009621-x64"
@@ -11539,7 +11552,7 @@ load_msdelta_w7()
         w_try_cp_dll "${W_TMP}/windows6.1-kb5010451-x64/amd64_microsoft-windows-servicingstack_31bf3856ad364e35_6.1.7601.25850_none_67df6b56f72c0fa9/msdelta.dll" "${W_SYSTEM64_DLLS}/msdelta.dll"
     fi
 
-    w_override_dlls native,builtin msdelta mspatcha dpx expand.exe
+    w_override_dlls native,builtin cabinet msdelta mspatcha dpx expand.exe
 }
 
 #----------------------------------------------------------------
