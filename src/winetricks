@@ -11509,27 +11509,34 @@ load_msdelta_w7()
     w_call msdelta_vista
     
     w_download https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2022/01/windows6.1-kb5009621-x86_2a693df44701335dd856670d1dc44d241addbf0a.msu 2d772d0b8e278abdf084a344f0ac58631770abe4ec5e43e8b8d1e1405337e3aa windows6.1-kb5009621-x86.msu
-    w_try_msexpand '*' "${W_CACHE}/${W_PACKAGE}/windows6.1-kb5009621-x86.msu" "${W_TMP}"
-    w_try_cp_dll "${W_TMP}/x86_microsoft-windows-basic-misc-tools_31bf3856ad364e35_6.1.7601.25827_none_19e597c536d11114/expand.exe" "${W_SYSTEM32_DLLS}/expand.exe"
-    
+    w_try_msexpand 'windows6.1-kb5009621-x86.cab' "${W_CACHE}/${W_PACKAGE}/windows6.1-kb5009621-x86.msu" "${W_TMP}"
+    w_try_mkdir "${W_TMP}/windows6.1-kb5009621-x86"
+    w_try_msexpand 'expand.exe' "${W_TMP}/windows6.1-kb5009621-x86.cab" "${W_TMP}/windows6.1-kb5009621-x86"
+    w_try_cp_dll "${W_TMP}/windows6.1-kb5009621-x86/x86_microsoft-windows-basic-misc-tools_31bf3856ad364e35_6.1.7601.25827_none_19e597c536d11114/expand.exe" "${W_SYSTEM32_DLLS}/expand.exe"
     
     w_download https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2022/01/windows6.1-kb5010451-x86_c059fc27db2ff7529da5c8c694a4551601458f28.msu 9dd52b799ee49071f8b55b763a69a0f893ce253ea8860a76b9ba85aa444f525b windows6.1-kb5010451-x86.msu
-    w_try_msexpand '*' "${W_CACHE}/${W_PACKAGE}/windows6.1-kb5010451-x86.msu" "${W_TMP}"
-    w_try_cp_dll "${W_TMP}/x86_microsoft-windows-servicingstack_31bf3856ad364e35_6.1.7601.25850_none_0bc0cfd33ece9e73/dpx.dll" "${W_SYSTEM32_DLLS}/dpx.dll"
-    w_try_cp_dll "${W_TMP}/x86_microsoft-windows-servicingstack_31bf3856ad364e35_6.1.7601.25850_none_0bc0cfd33ece9e73/mspatcha.dll" "${W_SYSTEM32_DLLS}/mspatcha.dll"
-    w_try_cp_dll "${W_TMP}/x86_microsoft-windows-servicingstack_31bf3856ad364e35_6.1.7601.25850_none_0bc0cfd33ece9e73/msdelta.dll" "${W_SYSTEM32_DLLS}/msdelta.dll"
+    w_try_msexpand 'windows6.1-kb5010451-x86.cab' "${W_CACHE}/${W_PACKAGE}/windows6.1-kb5010451-x86.msu" "${W_TMP}"
+    w_try_mkdir "${W_TMP}/windows6.1-kb5010451-x86"
+    w_try_msexpand '*.dll' "${W_TMP}/windows6.1-kb5010451-x86.cab" "${W_TMP}/windows6.1-kb5010451-x86"
+    w_try_cp_dll "${W_TMP}/windows6.1-kb5010451-x86/x86_microsoft-windows-servicingstack_31bf3856ad364e35_6.1.7601.25850_none_0bc0cfd33ece9e73/dpx.dll" "${W_SYSTEM32_DLLS}/dpx.dll"
+    w_try_cp_dll "${W_TMP}/windows6.1-kb5010451-x86/x86_microsoft-windows-servicingstack_31bf3856ad364e35_6.1.7601.25850_none_0bc0cfd33ece9e73/mspatcha.dll" "${W_SYSTEM32_DLLS}/mspatcha.dll"
+    w_try_cp_dll "${W_TMP}/windows6.1-kb5010451-x86/x86_microsoft-windows-servicingstack_31bf3856ad364e35_6.1.7601.25850_none_0bc0cfd33ece9e73/msdelta.dll" "${W_SYSTEM32_DLLS}/msdelta.dll"
 
     if [ "${W_ARCH}" = "win64" ]; then
         # Also install the 64-bit version
         w_download https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2022/01/windows6.1-kb5009621-x64_4f45ea40980c099d3280ef1f4306215c601cd0fc.msu cd0767a3a4a301e555b81398c597c30025ea6473570eda69387a62f27acc668e windows6.1-kb5009621-x64.msu
-        w_try_msexpand '*' "${W_CACHE}/${W_PACKAGE}/windows6.1-kb5009621-x64.msu" "${W_TMP}"
-        w_try_cp_dll "${W_TMP}/amd64_microsoft-windows-basic-misc-tools_31bf3856ad364e35_6.1.7601.25827_none_76043348ef2e824a/expand.exe" "${W_SYSTEM64_DLLS}/expand.exe"
+        w_try_msexpand 'windows6.1-kb5009621-x64.cab' "${W_CACHE}/${W_PACKAGE}/windows6.1-kb5009621-x64.msu" "${W_TMP}"
+        w_try_mkdir "${W_TMP}/windows6.1-kb5009621-x64"
+        w_try_msexpand 'expand.exe' "${W_TMP}/windows6.1-kb5009621-x64.cab" "${W_TMP}/windows6.1-kb5009621-x64"
+        w_try_cp_dll "${W_TMP}/windows6.1-kb5009621-x64/amd64_microsoft-windows-basic-misc-tools_31bf3856ad364e35_6.1.7601.25827_none_76043348ef2e824a/expand.exe" "${W_SYSTEM64_DLLS}/expand.exe"
 
         w_download https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2022/01/windows6.1-kb5010451-x64_992659d57fa1fab0b083f29b7e323cf5cb856f24.msu e8a83582b68085de33953d786d085187e28415beb211cae98da3b49e5200bbdc windows6.1-kb5010451-x64.msu
         w_try_msexpand '*' "${W_CACHE}/${W_PACKAGE}/windows6.1-kb5010451-x64.msu" "${W_TMP}"
-        w_try_cp_dll "${W_TMP}/amd64_microsoft-windows-servicingstack_31bf3856ad364e35_6.1.7601.25850_none_67df6b56f72c0fa9/dpx.dll" "${W_SYSTEM64_DLLS}/dpx.dll"
-        w_try_cp_dll "${W_TMP}/amd64_microsoft-windows-servicingstack_31bf3856ad364e35_6.1.7601.25850_none_67df6b56f72c0fa9/mspatcha.dll" "${W_SYSTEM64_DLLS}/mspatcha.dll"
-        w_try_cp_dll "${W_TMP}/amd64_microsoft-windows-servicingstack_31bf3856ad364e35_6.1.7601.25850_none_67df6b56f72c0fa9/msdelta.dll" "${W_SYSTEM64_DLLS}/msdelta.dll"
+        w_try_mkdir "${W_TMP}/windows6.1-kb5010451-x64"
+        w_try_msexpand '*.dll' "${W_TMP}/windows6.1-kb5010451-x64.cab" "${W_TMP}/windows6.1-kb5010451-x64"
+        w_try_cp_dll "${W_TMP}/windows6.1-kb5010451-x64/amd64_microsoft-windows-servicingstack_31bf3856ad364e35_6.1.7601.25850_none_67df6b56f72c0fa9/dpx.dll" "${W_SYSTEM64_DLLS}/dpx.dll"
+        w_try_cp_dll "${W_TMP}/windows6.1-kb5010451-x64/amd64_microsoft-windows-servicingstack_31bf3856ad364e35_6.1.7601.25850_none_67df6b56f72c0fa9/mspatcha.dll" "${W_SYSTEM64_DLLS}/mspatcha.dll"
+        w_try_cp_dll "${W_TMP}/windows6.1-kb5010451-x64/amd64_microsoft-windows-servicingstack_31bf3856ad364e35_6.1.7601.25850_none_67df6b56f72c0fa9/msdelta.dll" "${W_SYSTEM64_DLLS}/msdelta.dll"
     fi
 
     w_override_dlls native,builtin msdelta mspatcha dpx expand.exe
