@@ -809,6 +809,36 @@ w_try_msexpand()
     fi
 }
 
+w_try_wusa() {
+    local msu_file="$1"
+    local word="msdelta"
+    local fifo pid line
+
+    fifo="$(mktemp -u)"
+    mkfifo "$fifo"
+
+    #setsid env WINEDEBUG=+wusa wine wusa.exe "$msu_file" > "$fifo" 2>&1 &
+    wusa.exe "$msu_file" > "$fifo" 2>&1 &
+    pid=$!
+
+    while IFS= read -r line; do
+        echo "$line"
+
+        if [[ "$line" == *"$word"* ]]; then
+            echo "Detected '$word'"
+            kill -STOP "-$pid"
+
+            # Do stuff here
+            sleep 10
+
+            kill -CONT "-$pid"
+        fi
+    done < "$fifo"
+
+    wait "$pid"
+    rm -f "$fifo"
+}
+
 w_try_cd()
 {
     w_try cd "$@"
